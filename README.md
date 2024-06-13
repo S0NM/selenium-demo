@@ -1,4 +1,4 @@
-# web-summary-tool
+# Selenium Demo App
 
 ## How to setup Chrome in Streamlit Cloud
 ## 1. Make sure you have newest debian chrome packages
