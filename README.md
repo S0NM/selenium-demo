@@ -1,6 +1,6 @@
 # web-summary-tool
 
-## How to setup Chromium in Streamlit Cloud
+## How to setup Chrome in Streamlit Cloud
 ## 1. Make sure you have newest debian chrome packages
 Step 1: Create **apt.keys** and copy key from url:https://dl.google.com/linux/linux_signing_key.pub 
 ```
@@ -282,6 +282,7 @@ Step 3: Create **packages.txt**:
 ```
 chromium
 chromium-driver
+google-chrome-stable
 ```
 ## 2. Sample code of using selenium
 ```python
@@ -292,18 +293,18 @@ def get_website_content(url):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
-        options.add_argument('--window-size=1920,1200') 
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),
+        options.add_argument('--window-size=1920,1200')
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
                                   options=options)
-        print(f"DEBUG:DRIVER:{driver}")
+        st.write(f"DEBUG:DRIVER:{driver}")
         driver.get(url)
-        time.sleep(10)
+        time.sleep(5)
         html_doc = driver.page_source
         driver.quit()
         soup = BeautifulSoup(html_doc, "html.parser")
         return soup.get_text()
     except Exception as e:
-        print(f"DEBUG:INIT_DRIVER:ERROR:{e}")
+        st.write(f"DEBUG:INIT_DRIVER:ERROR:{e}")
     finally:
         if driver is not None: driver.quit()
     return None
